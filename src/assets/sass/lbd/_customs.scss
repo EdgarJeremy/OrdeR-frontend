@@ -1,0 +1,94 @@
+.content.solid {
+    background-color: #f9f9f9;
+}
+.menu-card {
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    background-color: #ffffff;
+    min-height: 200px;
+    margin-bottom: 20px;
+    &:hover {
+        .menu-card-background {
+            transform: scale(1.2);
+        }
+        .menu-card-details {
+            transform: translateY(-100%);
+        }
+        .menu-card-action {
+            transform: translateY(0%);
+            opacity: 1;
+        }
+    }
+    .menu-card-background {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transition: .3s ease;
+        background-color: rgba(0,0,0,.5);
+        background-blend-mode: multiply;
+    }
+    .menu-card-details {
+        text-align: center;
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 0;
+        right: 0;
+        color: #ffffff;
+        transform: translateY(-50%);
+        transition: .3s ease;
+        p {
+            margin: 0;
+        }
+        span {
+            font-size: 10px;
+            display: block;
+            margin-bottom: 10px;
+        }
+    }
+    .menu-card-action {
+        text-align: center;
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+        transition: .3s ease;
+        opacity: 0;
+        .menu-ctrl-btn {
+            color: #333333;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: #ecf0f1;
+            outline: 0;
+            border: 0;
+            padding: 1px 15px 5px 15px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            display: inline-block;
+        }
+        .menu-ctrl-btn.min {
+            background-color: #ecf0f1;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        .menu-ctrl-input {
+            display: inline-block;
+            width: 40px;
+            color: #333333;
+            text-align: center;
+            padding: 5px 0;
+            margin: 0 !important;
+        }
+    }
+}
+.search-container {
+    margin: 0 15px;
+    margin-bottom: 20px;
+}
