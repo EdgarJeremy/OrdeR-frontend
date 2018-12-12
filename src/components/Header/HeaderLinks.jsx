@@ -1,24 +1,26 @@
 import React, { Component } from "react";
-import { NavItem, Nav, NavDropdown, MenuItem } from "react-bootstrap";
+import { NavItem, Nav } from "react-bootstrap";
+import { Auth } from "../../services/request";
 
 class HeaderLinks extends Component {
-  render() {
-    const notification = (
-      <div>
-        <i className="fa fa-globe" />
-        <b className="caret" />
-        <span className="notification">5</span>
-        <p className="hidden-lg hidden-md">Notification</p>
-      </div>
-    );
-    return (
-      <div>
-        <Nav>
-          {/* <NavItem eventKey={1} href="#">
+
+	_onLogout() {
+		this.props.toggleLoading();
+		const { history } = this.props;
+		Auth.logout().then((res) => {
+			history.replace('/');
+		});
+	}
+
+	render() {
+		return (
+			<div>
+				<Nav>
+					{/* <NavItem eventKey={1} href="#">
             <i className="fa fa-dashboard" />
             <p className="hidden-lg hidden-md">Dashboard</p>
           </NavItem> */}
-          {/* <NavDropdown
+					{/* <NavDropdown
             eventKey={2}
             title={notification}
             noCaret
@@ -30,16 +32,16 @@ class HeaderLinks extends Component {
             <MenuItem eventKey={2.4}>Notification 4</MenuItem>
             <MenuItem eventKey={2.5}>Another notifications</MenuItem>
           </NavDropdown> */}
-          {/* <NavItem eventKey={3} href="#">
+					{/* <NavItem eventKey={3} href="#">
             <i className="fa fa-search" />
             <p className="hidden-lg hidden-md">Search</p>
           </NavItem> */}
-        </Nav>
-        <Nav pullRight>
-          <NavItem eventKey={1} href="#">
-            Account
-          </NavItem>
-          {/* <NavDropdown
+				</Nav>
+				<Nav pullRight>
+					<NavItem eventKey={1} href="#">
+						{this.props.user.name}
+					</NavItem>
+					{/* <NavDropdown
             eventKey={2}
             title="Dropdown"
             id="basic-nav-dropdown-right"
@@ -52,13 +54,13 @@ class HeaderLinks extends Component {
             <MenuItem divider />
             <MenuItem eventKey={2.5}>Separated link</MenuItem>
           </NavDropdown> */}
-          <NavItem eventKey={3} href="#">
-            Log out
+					<NavItem eventKey={3} onClick={this._onLogout.bind(this)}>
+						Log out
           </NavItem>
-        </Nav>
-      </div>
-    );
-  }
+				</Nav>
+			</div>
+		);
+	}
 }
 
 export default HeaderLinks;

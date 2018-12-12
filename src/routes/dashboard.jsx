@@ -1,21 +1,55 @@
-import Dashboard from "views/Dashboard/Dashboard";
-import UserProfile from "views/UserProfile/UserProfile";
-import TableList from "views/TableList/TableList";
-import Typography from "views/Typography/Typography";
-import Icons from "views/Icons/Icons";
-import Maps from "views/Maps/Maps";
-import Notifications from "views/Notifications/Notifications";
-import Upgrade from "views/Upgrade/Upgrade";
 import Pick from "../views/Order/Pick";
+import User from "../views/Admin/User";
+import Menu from "../views/Admin/Menu";
 
-const dashboardRoutes = [
-  {
-    path: "/home/picker",
-    name: "Pick Order",
-    icon: "pe-7s-keypad",
-    component: Pick
-  },
-  // { redirect: true, path: "/login", to: "/", name: "Login" }
+const orderRoutes = [
+	{
+		path: "/home",
+		name: "Pick Order",
+		icon: "pe-7s-keypad",
+		render: Pick
+	},
+	{ redirect: true, path: "/", to: "/", name: "redirect" }
 ];
 
-export default dashboardRoutes;
+const adminRoutes = [
+	{
+		path: '/home',
+		name: 'Menu',
+		icon: 'pe-7s-menu',
+		render: Menu
+	},
+	{
+		path: '/home/user',
+		name: 'Pengguna',
+		icon: 'pe-7s-users',
+		render: User
+	}
+];
+
+const foodRoutes = [
+
+];
+
+const beverageRoutes = [
+
+];
+
+const cashierRoutes = [
+
+];
+
+export default (level) => {
+	switch (level) {
+		case 'admin':
+			return adminRoutes;
+		case 'order':
+			return orderRoutes;
+		case 'food':
+			return foodRoutes;
+		case 'beverage':
+			return beverageRoutes;
+		default:
+			return cashierRoutes;
+	}
+}

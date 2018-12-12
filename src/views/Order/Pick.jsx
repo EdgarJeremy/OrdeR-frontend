@@ -27,9 +27,9 @@ export default class Pick extends React.Component {
                                                         <span>Rp. 25.000</span>
                                                     </div>
                                                     <div className="menu-card-action">
-                                                        <button className="menu-ctrl-btn plus">+</button>
+                                                        <button className="menu-ctrl-btn plus">-</button>
                                                         <input className="menu-ctrl-input" readOnly value={4} />
-                                                        <button className="menu-ctrl-btn min">-</button>
+                                                        <button className="menu-ctrl-btn min">+</button>
                                                     </div>
                                                 </div>
                                             </Col>
