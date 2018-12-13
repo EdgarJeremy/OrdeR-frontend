@@ -52,7 +52,7 @@ export const Auth = {
         });
     },
 
-    check: function() {
+    check: function () {
         return R({
             basepoint: this.basepoint,
             endpoint: `?t=${(new Date()).getTime()}`,
@@ -60,7 +60,7 @@ export const Auth = {
         });
     },
 
-    logout: function() {
+    logout: function () {
         return R({
             basepoint: this.basepoint,
             method: 'DELETE'
@@ -68,6 +68,27 @@ export const Auth = {
             localStorage.removeItem('accessToken');
             localStorage.removeItem('refreshToken');
             return res;
+        });
+    }
+
+}
+
+export const Menu = {
+
+    basepoint: '/menus',
+
+    findAll: function() {
+        return R({
+            basepoint: this.basepoint,
+            method: 'GET'
+        });
+    },
+
+    create: function (payload) {
+        return R({
+            basepoint: this.basepoint,
+            method: 'POST',
+            data: payload
         });
     }
 

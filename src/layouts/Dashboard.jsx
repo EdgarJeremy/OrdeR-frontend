@@ -7,8 +7,6 @@ import Footer from "components/Footer/Footer";
 import Sidebar from "components/Sidebar/Sidebar";
 import CustomLoading from 'components/CustomLoading/CustomLoading';
 
-import { style } from "variables/Variables.jsx";
-
 import dashboardRoutes from "routes/dashboard.jsx";
 import { Auth } from '../services/request';
 
@@ -16,7 +14,7 @@ class Dashboard extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			_notificationSystem: null,
+			_notif: null,
 			user: null,
 			loading: true
 		};
@@ -38,6 +36,7 @@ class Dashboard extends Component {
 	}
 
 	componentDidMount() {
+        this.setState({ _notif: this.refs.notif });
 		const { history } = this.props;
 		Auth.check().then((res) => {
 			this.setState({ loading: false, user: res.data });
@@ -54,26 +53,32 @@ class Dashboard extends Component {
 
 	render() {
 		const { loading, user } = this.state;
-		return loading ? <CustomLoading /> : (
-			<div className="wrapper">
-				<NotificationSystem ref="notificationSystem" style={style} />
-				<Sidebar {...this.props} user={user} />
-				<div id="main-panel" className="main-panel" ref="mainPanel">
-					<Header {...this.props} user={user} toggleLoading={this.toggleLoading.bind(this)} />
-					<Switch>
-						{dashboardRoutes(user.type).map((prop, key) => {
-							if (prop.redirect)
-								return <Redirect from={prop.path} to={prop.to} key={key} />;
+		return (
+			<div>
+				<NotificationSystem ref="notif" />
+				{
+					loading ? <CustomLoading /> : (
+						<div className="wrapper">
+							<Sidebar {...this.props} user={user} />
+							<div id="main-panel" className="main-panel" ref="mainPanel">
+								<Header {...this.props} user={user} toggleLoading={this.toggleLoading.bind(this)} />
+								<Switch>
+									{dashboardRoutes(user.type).map((prop, key) => {
+										if (prop.redirect)
+											return <Redirect from={prop.path} to={prop.to} key={key} />;
 
-							return (
-								<Route path={prop.path} exact render={(props) => <prop.render {...props} user={user} toggleLoading={this.toggleLoading.bind(this)} />} key={key} />
-							);
-						})}
-					</Switch>
-					<Footer />
-				</div>
+										return (
+											<Route path={prop.path} exact render={(props) => <prop.render {...props} user={user} toggleLoading={this.toggleLoading.bind(this)} notifSystem={this.state._notif} />} key={key} />
+										);
+									})}
+								</Switch>
+								<Footer />
+							</div>
+						</div>
+					)
+				}
 			</div>
-		)
+		);
 	}
 }
 

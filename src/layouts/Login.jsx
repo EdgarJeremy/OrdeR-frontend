@@ -3,6 +3,7 @@ import 'assets/css/login.css';
 import NotificationSystem from "react-notification-system";
 import CustomLoading from '../components/CustomLoading/CustomLoading';
 import { Auth } from '../services/request';
+import errorHandler from '../services/errorHandler';
 
 class Login extends React.Component {
 
@@ -43,18 +44,7 @@ class Login extends React.Component {
                 history.push('/home');
             }).catch((err) => {
                 this.setState({ loading: false }, () => {
-                    err.response.data.errors.forEach((error, i) => {
-                        this.state._notif.addNotification({
-                            message: (
-                                <div>
-                                    {error.msg}
-                                </div>
-                            ),
-                            level: 'warning',
-                            position: 'tr',
-                            autoDismiss: 15
-                        });
-                    });
+                    errorHandler(err, this.state._notif);
                 });
             });
         });

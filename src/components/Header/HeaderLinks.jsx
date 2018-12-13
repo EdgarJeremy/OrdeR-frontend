@@ -39,7 +39,7 @@ class HeaderLinks extends Component {
 				</Nav>
 				<Nav pullRight>
 					<NavItem eventKey={1} href="#">
-						{this.props.user.name}
+						{this.props.user && this.props.user.name}
 					</NavItem>
 					{/* <NavDropdown
             eventKey={2}
