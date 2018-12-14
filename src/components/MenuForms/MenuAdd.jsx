@@ -5,7 +5,7 @@ import 'react-image-crop/dist/ReactCrop.css';
 import { Menu } from '../../services/request';
 import errorHandler from '../../services/errorHandler';
 
-export default class Add extends React.Component {
+export default class MenuAdd extends React.Component {
 
     constructor(props) {
         super(props);

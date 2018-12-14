@@ -29,9 +29,7 @@ class Login extends React.Component {
         Auth.check().then((res) => {
             history.push('/home');
         }).catch((err) => {
-            this.setState({ loading: false }, () => {
-                console.log(this.state);
-            });
+            this.setState({ loading: false });
         });
     }
 

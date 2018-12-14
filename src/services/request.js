@@ -29,6 +29,7 @@ const R = function (config = {}) {
 
 const successHandler = function (res) {
     if (res.headers['x-access-token'] && res.headers['x-refresh-token']) {
+        console.log('renew');
         localStorage.setItem('accessToken', res.headers['x-access-token']);
         localStorage.setItem('refreshToken', res.headers['x-refresh-token']);
     }
@@ -76,6 +77,27 @@ export const Auth = {
 export const Menu = {
 
     basepoint: '/menus',
+
+    findAll: function() {
+        return R({
+            basepoint: this.basepoint,
+            method: 'GET'
+        });
+    },
+
+    create: function (payload) {
+        return R({
+            basepoint: this.basepoint,
+            method: 'POST',
+            data: payload
+        });
+    }
+
+}
+
+export const User = {
+
+    basepoint: '/users',
 
     findAll: function() {
         return R({

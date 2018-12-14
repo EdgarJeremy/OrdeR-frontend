@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Row, Col, Table, Button, FormControl, Modal } from "react-bootstrap";
 import swal from 'sweetalert';
 import Card from "components/Card/Card.jsx";
-import Add from '../../components/MenuForms/Add';
+import MenuAdd from '../../components/MenuForms/MenuAdd';
 import { Menu as mMenu } from '../../services/request';
 import errorHandler from '../../services/errorHandler';
 import CustomLoading from 'components/CustomLoading/CustomLoading';
@@ -68,6 +68,7 @@ export default class Menu extends React.Component {
 																<th>Nama Menu</th>
 																<th>Harga</th>
 																<th>Tipe</th>
+																<th>Waktu Diinput</th>
 																<th></th>
 															</tr>
 														</thead>
@@ -80,6 +81,7 @@ export default class Menu extends React.Component {
 																	<td>{menu.name}</td>
 																	<td>Rp. {menu.price}</td>
 																	<td>{menu.type === 'food' ? 'Makanan' : 'Minuman'}</td>
+																	<td>{menu.created_at}</td>
 																	<td>
 																		<Button bsStyle="primary"><i className="pe-7s-pen"></i> Edit</Button>&nbsp;
                                                             <Button bsStyle="danger"><i className="pe-7s-trash"></i> Hapus</Button>
@@ -98,13 +100,14 @@ export default class Menu extends React.Component {
 				}
 				<Modal show={addModal} onHide={this._hideModal.bind(this)}>
 					<Modal.Header closeButton>
-						<Modal.Title>Tambah Menu</Modal.Title>
+						Tambah Menu
 					</Modal.Header>
 					<Modal.Body>
-						<Add {...this.props} onComplete={() => {
-							swal('Menu Tersimpan', 'Menu baru sudah tersimpan', 'success');
-							this._fetch();
-							this._hideModal();
+						<MenuAdd {...this.props} onComplete={() => {
+							swal('Menu Tersimpan', 'Menu baru sudah tersimpan', 'success').then(() => {
+								this._fetch();
+								this._hideModal();
+							});
 						}} />
 					</Modal.Body>
 				</Modal>
