@@ -115,3 +115,24 @@ export const User = {
     }
 
 }
+
+export const Order = {
+
+    basepoint: '/orders',
+
+    findAll: function() {
+        return R({
+            basepoint: this.basepoint,
+            method: 'GET'
+        });
+    },
+
+    create: function (payload) {
+        return R({
+            basepoint: this.basepoint,
+            method: 'POST',
+            data: payload
+        });
+    }
+
+}

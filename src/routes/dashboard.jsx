@@ -1,13 +1,20 @@
 import Pick from "../views/Order/Pick";
 import User from "../views/Admin/User";
 import Menu from "../views/Admin/Menu";
+import Monitor from "../views/Order/Monitor";
 
 const orderRoutes = [
 	{
-		path: "/home",
-		name: "Pick Order",
-		icon: "pe-7s-keypad",
+		path: '/home',
+		name: 'Order Baru',
+		icon: 'pe-7s-keypad',
 		render: Pick
+	},
+	{
+		path: '/home/monitor',
+		name: 'Pantau Order',
+		icon: 'pe-7s-note2',
+		render: Monitor
 	},
 	{ redirect: true, path: "/", to: "/", name: "redirect" }
 ];
@@ -38,6 +45,12 @@ const beverageRoutes = [
 const cashierRoutes = [
 
 ];
+
+orderRoutes.push({ redirect: true, path: "/", to: "/", name: "redirect" });
+adminRoutes.push({ redirect: true, path: "/", to: "/", name: "redirect" });
+foodRoutes.push({ redirect: true, path: "/", to: "/", name: "redirect" });
+beverageRoutes.push({ redirect: true, path: "/", to: "/", name: "redirect" });
+cashierRoutes.push({ redirect: true, path: "/", to: "/", name: "redirect" });
 
 export default (level) => {
 	switch (level) {

@@ -7,7 +7,7 @@ class CustomLoading extends React.Component {
     render() {
         return (
             <div className={`loading-container`}>
-                <ReactLoading className="loading-el" type="bubbles" color="#74b9ff" width="100%"/>
+                <ReactLoading className="loading-el" type="bubbles" color="#333333" width="100%"/>
             </div>
         )
     }
